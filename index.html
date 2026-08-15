@@ -1,468 +1,2327 @@
 <!DOCTYPE html>
-<html lang="ku">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>کۆمەڵگەی شەهید فاخیر مەرگەسۆری</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Fade Barbers</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+        /* ===== CUSTOM CURSOR ===== */
+        body {
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Ctext y='34' font-size='34'%3E✂️%3C/text%3E%3C/svg%3E") 20 20, auto;
+        }
 
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Poppins',sans-serif;
-}
+        /* Gold Scissors for clickable items */
+        button, 
+        .price-item, 
+        .menu-item, 
+        .header-btns button, 
+        .header-btns a,
+        .hamburger,
+        .enter-btn,
+        .nav-btn,
+        .btn-primary,
+        .btn-secondary,
+        .action-btns button,
+        .panel-item,
+        .close-step,
+        #adminBtn {
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Ctext y='34' font-size='34' fill='%23c9a86c'%3E✂️%3C/text%3E%3C/svg%3E") 20 20, pointer;
+        }
 
-body{
-  background:#eef2f7;
-  color:#333;
-  scroll-behavior:smooth;
-}
+        /* Text inputs - Pencil */
+        input, select, textarea {
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'%3E%3Ctext y='30' font-size='30'%3E✏️%3C/text%3E%3C/svg%3E") 18 18, text;
+        }
 
-/* animations */
-@keyframes fadeSlideUp {
-  0% { opacity: 0; transform: translateY(30px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
+        /* Links - Gold Pointer */
+        a {
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'%3E%3Ctext y='30' font-size='30' fill='%23c9a86c'%3E👉%3C/text%3E%3C/svg%3E") 18 18, pointer;
+        }
 
-@keyframes gentlePulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.02); }
-  100% { transform: scale(1); }
-}
+        /* Table rows hover */
+        tr {
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'%3E%3Ctext y='30' font-size='30' fill='%23c9a86c'%3E✂️%3C/text%3E%3C/svg%3E") 18 18, pointer;
+        }
 
-@keyframes slideInLeft {
-  0% { opacity: 0; transform: translateX(-40px); }
-  100% { opacity: 1; transform: translateX(0); }
-}
+        /* Disabled state */
+        button:disabled, .nav-btn:disabled {
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'%3E%3Ctext y='30' font-size='30'%3E🚫%3C/text%3E%3C/svg%3E") 18 18, not-allowed;
+        }
 
-@keyframes slideInRight {
-  0% { opacity: 0; transform: translateX(40px); }
-  100% { opacity: 1; transform: translateX(0); }
-}
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-nav, header, section, footer {
-  animation: fadeSlideUp 0.7s ease forwards;
-}
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
 
-/* navigation */
-nav{
-  background:#2575fc;
-  padding:15px 30px;
-  display:flex;
-  justify-content:center;
-  gap:20px;
-  position:sticky;
-  top:0;
-  z-index:1000;
-  flex-wrap:wrap;
-}
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
 
-nav a{
-  text-decoration:none;
-  color:white;
-  font-weight:600;
-  transition:all 0.3s ease;
-  display:inline-block;
-}
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(201, 168, 108, 0.2); }
+            50% { box-shadow: 0 0 50px rgba(201, 168, 108, 0.5); }
+        }
 
-nav a:hover{
-  transform:translateY(-3px);
-  text-shadow:0 2px 5px rgba(0,0,0,0.2);
-}
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-60px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
 
-/* language button */
-.lang-switch{
-  position:absolute;
-  top:15px;
-  left:20px;
-  background:white;
-  color:#2575fc;
-  border:none;
-  padding:8px 12px;
-  border-radius:8px;
-  cursor:pointer;
-  font-weight:600;
-  z-index:1100;
-  transition:all 0.2s ease;
-}
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(60px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
 
-.lang-switch:hover{
-  background:#ff9800;
-  color:white;
-  border-radius:20px;
-}
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
 
-/* fixed header alignment */
-header{
-  text-align:center;
-  padding:60px 20px;
-  background:linear-gradient(135deg,#4a148c,#1976d2);
-  color:white;
-  position:relative;
+        @keyframes rotateIn {
+            from { opacity: 0; transform: rotate(-10deg) scale(0.9); }
+            to { opacity: 1; transform: rotate(0) scale(1); }
+        }
 
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-}
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
 
-header img{
-  width:160px;
-  height:160px;
-  margin-bottom:15px;
-  border-radius:50%;
-  border:4px solid white;
-  cursor:pointer;
-  object-fit:cover;
-  display:block;
-  transition:transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-}
+        @keyframes confettiFall {
+            0% { opacity: 1; transform: translateY(-100px) rotate(0deg); }
+            100% { opacity: 0; transform: translateY(100vh) rotate(720deg); }
+        }
 
-header img:hover{
-  transform:rotate(8deg) scale(1.08);
-}
+        @keyframes borderGlow {
+            0%, 100% { border-color: rgba(201, 168, 108, 0.2); }
+            50% { border-color: rgba(201, 168, 108, 0.6); }
+        }
 
-header h1{
-  text-align:center;
-  margin-top:10px;
-  font-size:2.2em;
-  line-height:1.5;
-}
+        @keyframes textGlow {
+            0%, 100% { text-shadow: 0 0 10px rgba(201, 168, 108, 0.2); }
+            50% { text-shadow: 0 0 30px rgba(201, 168, 108, 0.6); }
+        }
 
-header p{
-  text-align:center;
-  margin-top:8px;
-  font-size:1.1em;
-}
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
 
-/* sections */
-section{
-  padding:70px 20px;
-  max-width:1200px;
-  margin:auto;
-}
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
 
-section h2{
-  text-align:center;
-  margin-bottom:30px;
-  font-size:2.5em;
-  color:#1976d2;
-  animation:slideInLeft 0.5s ease;
-  position:relative;
-}
+        @keyframes rainbow {
+            0% { color: #ff6b6b; }
+            16% { color: #feca57; }
+            33% { color: #ff9ff3; }
+            50% { color: #54a0ff; }
+            66% { color: #5f27cd; }
+            83% { color: #1dd1a1; }
+            100% { color: #ff6b6b; }
+        }
 
-section h2::after{
-  content:'';
-  display:block;
-  width:80px;
-  height:4px;
-  background:#ff9800;
-  margin:12px auto 0;
-  border-radius:4px;
-  animation:gentlePulse 1.5s infinite ease;
-}
+        @keyframes sparkle {
+            0% { opacity: 0; transform: scale(0) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1.5) rotate(180deg); }
+            100% { opacity: 0; transform: scale(0) rotate(360deg); }
+        }
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:25px;
-  margin-top:30px;
-}
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-.card{
-  background:white;
-  padding:22px;
-  border-radius:14px;
-  box-shadow:0 6px 12px rgba(0,0,0,0.1);
-  animation:fadeSlideUp 0.6s ease backwards;
-  transition:transform 0.3s ease, box-shadow 0.3s ease;
-}
+        .animate-fade-up { animation: fadeInUp 0.8s ease forwards; }
+        .animate-slide-left { animation: slideInLeft 0.8s ease forwards; }
+        .animate-slide-right { animation: slideInRight 0.8s ease forwards; }
+        .animate-scale { animation: scaleIn 0.8s ease forwards; }
+        .animate-rotate { animation: rotateIn 0.8s ease forwards; }
+        .animate-bounce { animation: bounce 2s ease-in-out infinite; }
+        .animate-wiggle { animation: wiggle 1s ease-in-out infinite; }
+        .animate-rainbow { animation: rainbow 3s linear infinite; }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
 
-.card:hover{
-  transform:translateY(-10px) scale(1.02);
-  box-shadow:0 20px 30px rgba(0,0,0,0.15);
-}
+        /* WELCOME OVERLAY */
+        .welcome-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            animation: fadeInUp 0.5s ease;
+        }
 
-.card h3{
-  margin-bottom:10px;
-  color:#1976d2;
-  line-height:1.8;
-}
+        .welcome-overlay.active {
+            display: flex;
+        }
 
-.card p{
-  line-height:1.8;
-}
+        .welcome-box {
+            text-align: center;
+            animation: scaleIn 0.8s ease;
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+        }
 
-.grid .card:nth-child(1){ animation-delay:0.05s; }
-.grid .card:nth-child(2){ animation-delay:0.1s; }
-.grid .card:nth-child(3){ animation-delay:0.15s; }
-.grid .card:nth-child(4){ animation-delay:0.2s; }
+        .welcome-box .welcome-icon {
+            font-size: 80px;
+            color: #c9a86c;
+            animation: float 3s ease-in-out infinite;
+        }
 
-/* music */
-.music-container{
-  position:fixed;
-  bottom:20px;
-  left:20px;
-  background:white;
-  border-radius:16px;
-  padding:15px;
-  box-shadow:0 5px 20px rgba(0,0,0,0.2);
-  z-index:999;
-  width:320px;
-  border:2px solid #1976d2;
-  animation:slideInRight 0.5s ease;
-  transition:all 0.2s;
-}
+        .welcome-box h1 {
+            font-size: 48px;
+            background: linear-gradient(135deg, #f5d793, #d9b16b, #f5d793);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 3s linear infinite;
+            margin: 20px 0 10px;
+        }
 
-.music-container:hover{
-  transform:scale(1.02);
-  box-shadow:0 10px 25px rgba(0,0,0,0.3);
-}
+        .welcome-box p {
+            color: #cec3b4;
+            font-size: 18px;
+            margin-bottom: 10px;
+            animation: textGlow 2s ease-in-out infinite;
+        }
 
-.music-title{
-  color:#1976d2;
-  font-weight:700;
-  margin-bottom:10px;
-  text-align:center;
-  font-size:16px;
-}
+        .welcome-box .sub-text {
+            color: #7a6e5e;
+            font-size: 14px;
+        }
 
-.music-iframe{
-  width:100%;
-  height:60px;
-  border-radius:8px;
-  border:1px solid #ddd;
-}
+        .welcome-box .emoji-rain {
+            font-size: 40px;
+            margin: 15px 0;
+            animation: bounce 2s ease-in-out infinite;
+        }
 
-.music-note{
-  text-align:center;
-  font-size:12px;
-  color:#666;
-  margin-top:8px;
-}
+        .welcome-box .enter-btn {
+            margin-top: 25px;
+            padding: 15px 50px;
+            border-radius: 50px;
+            border: none;
+            background: linear-gradient(135deg, #c9a86c, #dbb97a);
+            color: #0a0908;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: pulse 2s ease-in-out infinite;
+        }
 
-/* footer */
-footer{
-  background:#1976d2;
-  color:white;
-  text-align:center;
-  padding:20px;
-}
+        .welcome-box .enter-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 40px rgba(201, 168, 108, 0.5);
+        }
 
-footer p{
-  animation:gentlePulse 2s infinite ease;
-}
+        /* HEADER */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 25px;
+            background: rgba(26, 23, 20, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 50px;
+            border: 1px solid rgba(201, 168, 108, 0.2);
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+            animation: fadeInUp 0.8s ease;
+            border-color: rgba(201, 168, 108, 0.2);
+        }
 
-/* mobile */
-@media (max-width:600px){
-  header{
-    padding:50px 15px;
-  }
+        .logo {
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #f5d793, #d9b16b, #f5d793);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 3s linear infinite;
+        }
 
-  header img{
-    width:130px;
-    height:130px;
-  }
+        .logo i {
+            -webkit-text-fill-color: #c9a86c;
+            margin-right: 10px;
+            animation: float 3s ease-in-out infinite;
+        }
 
-  header h1{
-    font-size:1.6em;
-  }
+        .header-btns {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
 
-  section h2{
-    font-size:2em;
-  }
+        .header-btns button,
+        .header-btns a {
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: 1px solid rgba(201, 168, 108, 0.2);
+            background: rgba(42, 38, 34, 0.6);
+            color: #f0ece4;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-size: 14px;
+            backdrop-filter: blur(10px);
+        }
 
-  .music-container{
-    width:280px;
-    padding:12px;
-  }
-}
-</style>
+        .header-btns button:hover,
+        .header-btns a:hover {
+            background: #c9a86c;
+            color: #0a0908;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 30px rgba(201, 168, 108, 0.3);
+        }
+
+        /* CONTACT BAR */
+        .contact-bar {
+            background: rgba(26, 23, 20, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 12px 25px;
+            border-radius: 50px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px 40px;
+            margin-bottom: 25px;
+            border-left: 4px solid #c9a86c;
+            animation: slideInLeft 0.8s ease;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-bar span {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .contact-bar span:hover {
+            transform: translateX(5px);
+            color: #f5d793;
+        }
+
+        .contact-bar i {
+            color: #c9a86c;
+            width: 20px;
+            font-size: 16px;
+        }
+
+        .contact-bar a {
+            color: #f0ece4;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .contact-bar a:hover {
+            color: #c9a86c;
+        }
+
+        /* GRID */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .contact-bar {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .welcome-box h1 {
+                font-size: 32px;
+            }
+        }
+
+        /* CARDS */
+        .card {
+            background: linear-gradient(145deg, #171412, #1f1b18);
+            border-radius: 28px;
+            padding: 25px;
+            border: 1px solid rgba(201, 168, 108, 0.08);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s ease;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 20px 60px rgba(201, 168, 108, 0.08);
+            border-color: rgba(201, 168, 108, 0.2);
+        }
+
+        .card h2 {
+            color: #f5d793;
+            font-size: 22px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card h2 i {
+            color: #c9a86c;
+            font-size: 24px;
+        }
+
+        /* PRICE LIST */
+        .price-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px;
+        }
+
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(42, 37, 32, 0.5);
+            font-size: 14px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .price-item:hover {
+            background: rgba(201, 168, 108, 0.05);
+            padding-left: 10px;
+            border-radius: 8px;
+            transform: scale(1.02);
+        }
+
+        .price-item .service {
+            color: #cec3b4;
+            transition: 0.3s;
+        }
+
+        .price-item:hover .service {
+            color: #f5d793;
+        }
+
+        .price-item .price {
+            color: #f5d793;
+            font-weight: 600;
+            background: rgba(201, 168, 108, 0.1);
+            padding: 0 12px;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+
+        .price-item:hover .price {
+            background: rgba(201, 168, 108, 0.2);
+            transform: scale(1.05);
+        }
+
+        .price-special {
+            margin-top: 15px;
+            background: rgba(201, 168, 108, 0.05);
+            padding: 15px;
+            border-radius: 16px;
+            border-left: 3px solid #c9a86c;
+            font-size: 14px;
+            color: #d4c8b8;
+            line-height: 1.6;
+            transition: 0.3s;
+        }
+
+        .price-special:hover {
+            background: rgba(201, 168, 108, 0.08);
+            transform: scale(1.01);
+        }
+
+        .price-special strong {
+            color: #f5d793;
+        }
+
+        .free-drink {
+            margin-top: 10px;
+            color: #c9a86c;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .free-drink i {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* HAIRCUT DISPLAY - REAL PHOTO STYLE */
+        .haircut-display {
+            margin-top: 15px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 16px;
+            border: 2px solid rgba(201, 168, 108, 0.15);
+            text-align: center;
+            display: none;
+            animation: scaleIn 0.5s ease;
+            min-height: 120px;
+        }
+
+        .haircut-display.show {
+            display: block;
+        }
+
+        .haircut-display .haircut-preview {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .haircut-display .haircut-preview .preview-icon {
+            font-size: 70px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .haircut-display .haircut-preview .preview-info {
+            text-align: left;
+        }
+
+        .haircut-display .haircut-preview .preview-info .name {
+            color: #f5d793;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .haircut-display .haircut-preview .preview-info .price {
+            color: #c9a86c;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .haircut-display .haircut-preview .preview-info .desc {
+            color: #7a6e5e;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        .haircut-display .haircut-preview .preview-info .stars {
+            color: #f5d793;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        /* FORM */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #cec3b4;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 18px;
+            background: rgba(37, 32, 27, 0.8);
+            border: 1px solid rgba(61, 53, 46, 0.5);
+            border-radius: 30px;
+            color: #f0ece4;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #c9a86c;
+            box-shadow: 0 0 0 4px rgba(201, 168, 108, 0.1);
+            transform: scale(1.01);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 60px;
+            border-radius: 16px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #c9a86c, #dbb97a);
+            border: none;
+            color: #0a0908;
+            font-weight: 700;
+            padding: 14px;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(201, 168, 108, 0.4);
+        }
+
+        .btn-secondary {
+            padding: 8px 20px;
+            border-radius: 30px;
+            border: 1px solid rgba(201, 168, 108, 0.2);
+            background: rgba(42, 38, 34, 0.6);
+            color: #f0ece4;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 13px;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(201, 168, 108, 0.15);
+            border-color: #c9a86c;
+            transform: translateY(-2px);
+        }
+
+        /* ADMIN PANEL */
+        #adminPanel {
+            display: none;
+            grid-column: 1 / -1;
+        }
+
+        #adminPanel.active {
+            display: block;
+            animation: scaleIn 0.5s ease;
+        }
+
+        .admin-table-wrap {
+            overflow-x: auto;
+            margin-top: 10px;
+            border-radius: 16px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        th {
+            text-align: left;
+            padding: 10px 8px;
+            border-bottom: 2px solid rgba(201, 168, 108, 0.2);
+            color: #c9a86c;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 10px 8px;
+            border-bottom: 1px solid rgba(42, 37, 32, 0.3);
+            vertical-align: middle;
+        }
+
+        tr:hover td {
+            background: rgba(201, 168, 108, 0.03);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 3px 14px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 600;
+            background: rgba(47, 42, 36, 0.6);
+            color: #b8ab9a;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .status-badge.accepted {
+            background: rgba(43, 122, 75, 0.3);
+            color: #8ed4a8;
+            border-color: rgba(43, 122, 75, 0.3);
+        }
+
+        .status-badge.declined {
+            background: rgba(122, 43, 43, 0.3);
+            color: #d48e8e;
+            border-color: rgba(122, 43, 43, 0.3);
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .action-btns button {
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: none;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .action-btns .accept-btn {
+            background: linear-gradient(135deg, #2b7a4b, #379b60);
+        }
+        .action-btns .accept-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 20px rgba(43, 122, 75, 0.4);
+        }
+
+        .action-btns .decline-btn {
+            background: linear-gradient(135deg, #7a2b2b, #9b3737);
+        }
+        .action-btns .decline-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 20px rgba(122, 43, 43, 0.4);
+        }
+
+        .empty-msg {
+            color: #6a5f4e;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .admin-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        /* LOGIN OVERLAY */
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .login-overlay.active {
+            display: flex;
+        }
+
+        .login-box {
+            background: linear-gradient(145deg, #1a1714, #221e1a);
+            padding: 40px;
+            border-radius: 40px;
+            border: 1px solid rgba(201, 168, 108, 0.15);
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 40px 120px rgba(0, 0, 0, 0.8);
+            animation: rotateIn 0.6s ease;
+        }
+
+        .login-box h2 {
+            font-size: 28px;
+            color: #f5d793;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .login-box p {
+            color: #7a6e5e;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 14px 20px;
+            background: rgba(37, 32, 27, 0.8);
+            border: 1px solid rgba(61, 53, 46, 0.5);
+            border-radius: 30px;
+            color: #f0ece4;
+            font-size: 16px;
+            margin-bottom: 15px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .login-box input:focus {
+            border-color: #c9a86c;
+            box-shadow: 0 0 0 4px rgba(201, 168, 108, 0.1);
+        }
+
+        .login-box .btn-primary {
+            width: 100%;
+        }
+
+        .login-error {
+            color: #d48e8e;
+            text-align: center;
+            margin-top: 10px;
+            display: none;
+        }
+
+        /* HAMBURGER */
+        .hamburger {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            z-index: 999;
+            padding: 14px 16px;
+            background: rgba(26, 23, 20, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 50px;
+            border: 1px solid rgba(201, 168, 108, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .hamburger:hover {
+            background: rgba(201, 168, 108, 0.15);
+            transform: scale(1.1) rotate(5deg);
+            border-color: rgba(201, 168, 108, 0.4);
+        }
+
+        .hamburger .line {
+            width: 26px;
+            height: 2.5px;
+            background: #f5d793;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger:hover .line {
+            background: #ffffff;
+        }
+
+        /* SIDE PANEL */
+        .side-panel {
+            position: fixed;
+            bottom: 85px;
+            left: 25px;
+            z-index: 998;
+            background: rgba(26, 23, 20, 0.98);
+            backdrop-filter: blur(30px);
+            border-radius: 28px;
+            border: 1px solid rgba(201, 168, 108, 0.15);
+            padding: 20px;
+            min-width: 280px;
+            max-width: 350px;
+            max-height: 60vh;
+            overflow-y: auto;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+            display: none;
+            animation: slideInLeft 0.3s ease;
+        }
+
+        .side-panel.active {
+            display: block;
+        }
+
+        .side-panel::-webkit-scrollbar {
+            width: 4px;
+        }
+        .side-panel::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .side-panel::-webkit-scrollbar-thumb {
+            background: #c9a86c;
+            border-radius: 10px;
+        }
+
+        .side-panel h3 {
+            color: #f5d793;
+            font-size: 18px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .side-panel .menu-item {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(42, 37, 32, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #cec3b4;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .side-panel .menu-item:hover {
+            color: #f5d793;
+            padding-left: 10px;
+            transform: scale(1.02);
+        }
+
+        .side-panel .menu-item i {
+            color: #c9a86c;
+            width: 20px;
+        }
+
+        .side-panel .menu-item .badge {
+            background: rgba(201, 168, 108, 0.2);
+            padding: 2px 10px;
+            border-radius: 30px;
+            font-size: 11px;
+            color: #c9a86c;
+            margin-left: auto;
+        }
+
+        .side-panel .log-entry {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(42, 37, 32, 0.2);
+            font-size: 12px;
+            color: #a0907e;
+        }
+
+        .side-panel .log-entry .log-time {
+            color: #6a5f4e;
+        }
+        .side-panel .log-entry .log-action {
+            color: #f5d793;
+        }
+
+        .side-panel .panel-footer {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(42, 37, 32, 0.3);
+            font-size: 12px;
+            color: #6a5f4e;
+            line-height: 1.8;
+        }
+
+        .side-panel .panel-footer i {
+            color: #c9a86c;
+            width: 18px;
+        }
+
+        /* TOAST */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            right: 25px;
+            background: rgba(26, 23, 20, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 12px 25px;
+            border-radius: 30px;
+            border-left: 4px solid #c9a86c;
+            color: #f0ece4;
+            font-weight: 500;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            display: none;
+            z-index: 999;
+            max-width: 400px;
+            font-size: 14px;
+            animation: slideInRight 0.3s ease;
+        }
+
+        .toast.show {
+            display: block;
+        }
+
+        .toast i {
+            color: #c9a86c;
+            margin-right: 10px;
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: rgba(74, 67, 60, 0.5);
+            font-size: 13px;
+            border-top: 1px solid rgba(42, 37, 32, 0.3);
+            padding-top: 25px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .footer i {
+            color: #c9a86c;
+        }
+
+        /* CONFETTI */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9997;
+            overflow: hidden;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            animation: confettiFall linear forwards;
+        }
+
+        /* STEP GUIDE */
+        .step-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .step-overlay.active {
+            display: flex;
+        }
+
+        .step-content {
+            background: linear-gradient(145deg, #1a1714, #221e1a);
+            border-radius: 40px;
+            border: 1px solid rgba(201, 168, 108, 0.15);
+            max-width: 700px;
+            width: 92%;
+            padding: 30px;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 40px 120px rgba(0, 0, 0, 0.8);
+            animation: scaleIn 0.5s ease;
+        }
+
+        .step-content .close-step {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: #6a5f4e;
+            font-size: 24px;
+            cursor: pointer;
+            transition: 0.3s;
+            z-index: 10;
+        }
+
+        .step-content .close-step:hover {
+            color: #f5d793;
+            transform: rotate(90deg);
+        }
+
+        .step-content .step-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .step-content .step-header h2 {
+            font-size: 28px;
+            color: #f5d793;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .step-content .step-header h2 i {
+            color: #c9a86c;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .step-content .step-header .counter {
+            color: #7a6e5e;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .step-slide {
+            display: none;
+            flex: 1;
+            overflow-y: auto;
+            padding: 5px 0;
+        }
+
+        .step-slide.active {
+            display: block;
+            animation: fadeInUp 0.4s ease;
+        }
+
+        .step-slide .step-card {
+            background: rgba(201, 168, 108, 0.05);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid rgba(201, 168, 108, 0.08);
+            transition: 0.3s;
+        }
+
+        .step-slide .step-card:hover {
+            background: rgba(201, 168, 108, 0.08);
+        }
+
+        .step-slide .step-num {
+            font-size: 48px;
+            font-weight: 700;
+            color: #c9a86c;
+            opacity: 0.2;
+            margin-bottom: 5px;
+        }
+
+        .step-slide .step-title {
+            font-size: 22px;
+            color: #f5d793;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .step-slide .step-desc {
+            color: #cec3b4;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .step-slide .step-desc .highlight {
+            color: #c9a86c;
+            font-weight: 600;
+        }
+
+        .step-slide .step-icon {
+            margin-top: 15px;
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            border: 2px dashed rgba(201, 168, 108, 0.1);
+        }
+
+        .step-slide .step-icon i {
+            font-size: 48px;
+            color: #c9a86c;
+            opacity: 0.5;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .step-slide .step-icon p {
+            color: #6a5f4e;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        .step-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(42, 37, 32, 0.3);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .step-nav .nav-btn {
+            padding: 10px 25px;
+            border-radius: 30px;
+            border: 1px solid rgba(201, 168, 108, 0.2);
+            background: rgba(42, 38, 34, 0.6);
+            color: #f0ece4;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .step-nav .nav-btn:hover:not(:disabled) {
+            background: rgba(201, 168, 108, 0.15);
+            border-color: #c9a86c;
+            transform: translateY(-2px);
+        }
+
+        .step-nav .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .step-nav .nav-btn.primary {
+            background: linear-gradient(135deg, #c9a86c, #dbb97a);
+            color: #0a0908;
+            border: none;
+        }
+
+        .step-nav .nav-btn.primary:hover:not(:disabled) {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 30px rgba(201, 168, 108, 0.3);
+        }
+
+        .step-nav .dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .step-nav .dots .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(42, 37, 32, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .step-nav .dots .dot.active {
+            background: #c9a86c;
+            box-shadow: 0 0 20px rgba(201, 168, 108, 0.3);
+            transform: scale(1.2);
+        }
+
+        @media (max-width: 500px) {
+            .price-grid {
+                grid-template-columns: 1fr;
+            }
+            .side-panel {
+                left: 10px;
+                right: 10px;
+                min-width: unset;
+            }
+            .hamburger {
+                bottom: 15px;
+                left: 15px;
+            }
+            .toast {
+                right: 10px;
+                left: 10px;
+                bottom: 80px;
+            }
+            .step-content {
+                padding: 20px;
+            }
+            .step-nav {
+                flex-wrap: wrap;
+                gap: 10px;
+                justify-content: center;
+            }
+            .step-slide .step-card {
+                padding: 15px;
+            }
+            .login-box {
+                padding: 25px;
+            }
+            .welcome-box h1 {
+                font-size: 28px;
+            }
+            .welcome-box .welcome-icon {
+                font-size: 50px;
+            }
+            .haircut-display .haircut-preview {
+                flex-direction: column;
+                text-align: center;
+            }
+            .haircut-display .haircut-preview .preview-info {
+                text-align: center;
+            }
+        }
+    </style>
 </head>
+<body>
 
-<body lang="ku" dir="rtl">
-
-<select class="lang-switch" onchange="changeLanguage(this.value)">
-  <option value="ku">کوردی (سۆرانی)</option>
-  <option value="bd">کوردی (بادینی)</option>
-  <option value="ar">العربية</option>
-  <option value="en">English</option>
-</select>
-
-<nav>
-  <a href="#home" data-ku="سەرەتا" data-bd="سەرەتە" data-ar="الرئيسية" data-en="Home">سەرەتا</a>
-  <a href="#about" data-ku="دەربارە" data-bd="دەربارە" data-ar="حول" data-en="About">دەربارە</a>
-  <a href="#news" data-ku="کاروچاڵاکیەکانی ئەم ھەفتیە" data-bd="کاروچاڵاکیەکانی ئەم ھەفتیە" data-ar="النشاطات الأسبوعية" data-en="Weekly Activities">کاروچاڵاکیەکانی ئەم ھەفتیە</a>
-  <a href="#info" data-ku="زانیاری زیاتر" data-bd="زانیاری زیاتر" data-ar="معلومات إضافية" data-en="Info">زانیاری زیاتر</a>
-  <a href="#contact" data-ku="ناونیشانی کۆمەڵگا" data-bd="ناونیشانی کۆمەڵگا" data-ar="اتصل" data-en="Contact">ناونیشانی کۆمەڵگا</a>
-</nav>
-
-<header id="home">
-  <img 
-    src="https://tse2.mm.bing.net/th/id/OIP.h4b_qly2cFQquu-TxmI0UgHaHa?rs=1&pid=ImgDetMain&o=7&rm=3"
-    alt="لۆگۆی خوێندنگە"
-  >
-
-  <h1 data-ku="کۆمەڵگەی شەهید فاخیر مەرگەسۆری" 
-      data-bd="کۆمەڵگەی شەهید فاخیر مەرگەسۆری" 
-      data-ar="مدرسة شهيد فخير مرجاصوري" 
-      data-en="Shahid Fakhir Mergasori School">
-      کۆمەڵگەی شەهید فاخیر مەرگەسۆری
-  </h1>
-
-  <p data-ku="بەخێربێن بۆ ماڵپەڕی فەرمی کۆمەڵگەکەمان" 
-     data-bd="بەخێربێن بۆ ماڵپەڕی فەرمی کۆمەڵگەکەمان" 
-     data-ar="مرحبًا بكم في موقعنا الرسمي" 
-     data-en="Welcome to our official school website">
-     بەخێربێن بۆ ماڵپەڕی فەرمی کۆمەڵگەکەمان
-  </p>
-</header>
-
-<section id="about">
-  <h2 data-ku="دەربارەی کۆمەڵگەی شەهید فاخیر مەرگەسۆری" 
-      data-bd="دەربارەی کۆمەڵگەی شەهید فاخیر مەرگەسۆری" 
-      data-ar="حول المدرسة" 
-      data-en="About Our School">
-      دەربارەی کۆمەڵگەی شەهید فاخیر مەرگەسۆری
-  </h2>
-
-  <div class="grid">
-    <div class="card">
-      <h3 data-ku="بینینی ئێمە" data-bd="بینینی ئێمە" data-ar="رؤيتنا" data-en="Our Vision">بینینی ئێمە</h3>
-      <p data-ku="خوێندنی باکیفی، بەشداربوون و ڕاهێنان بۆ داهاتوویەکی بەهێز." data-bd="خوێندنی باکیفی، بەشداربوون و ڕاهێنان بۆ داهاتوویەکی بەهێز." data-ar="تعليم ذو جودة وإرشاد الطلاب لمستقبل أفضل." data-en="Quality education and guiding students for a brighter future.">خوێندنی باکیفی، بەشداربوون و ڕاهێنان بۆ داهاتوویەکی بەهێز.</p>
+    <!-- WELCOME OVERLAY -->
+    <div class="welcome-overlay" id="welcomeOverlay">
+        <div class="welcome-box">
+            <div class="welcome-icon">✂️</div>
+            <h1>Royal Fade Barbers</h1>
+            <p>🔥 Welcome to the finest grooming experience! 🔥</p>
+            <div class="emoji-rain">💈 ✨ 💇‍♂️ ✨ 💈</div>
+            <p class="sub-text">📞 07383 373183 | ✉️ hardysha35@gmail.com</p>
+            <p class="sub-text" style="margin-top:5px;">📍 Find us on Google Maps</p>
+            <button class="enter-btn" id="enterBtn"><i class="fas fa-cut"></i> Enter the Shop <i class="fas fa-scissors"></i></button>
+        </div>
     </div>
 
-    <div class="card">
-      <h3 data-ku="ئامانجی ئێمە" data-bd="ئامانجی ئێمە" data-ar="مهمتنا" data-en="Our Mission">ئامانجی ئێمە</h3>
-      <p data-ku="پێشکەشکردنی فێرکاری باکیفی و گەشەی تایبەتی." data-bd="پێشکەشکردنی فێرکاری باکیفی و گەشەی تایبەتی." data-ar="تقديم تعليم عالي الجودة ونمو شخصي." data-en="Providing quality learning and personal growth.">پێشکەشکردنی فێرکاری باکیفی و گەشەی تایبەتی.</p>
+    <!-- CONFETTI -->
+    <div class="confetti-container" id="confettiContainer"></div>
+
+    <!-- LOGIN OVERLAY -->
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-box">
+            <h2><i class="fas fa-crown"></i> Admin Access</h2>
+            <p>Enter your password to manage bookings</p>
+            <input type="password" id="adminPass" placeholder="Enter password">
+            <button class="btn-primary" id="loginBtn"><i class="fas fa-unlock-alt"></i> Unlock</button>
+            <div class="login-error" id="loginError">❌ Wrong password. Try again.</div>
+        </div>
     </div>
 
-    <div class="card">
-      <h3 data-ku="ڕێکەوتی دامەزراندن" data-bd="ڕێکەوتی دامەزراندن" data-ar="التأسيس" data-en="History and Creation">ڕێکەوتی دامەزراندن</h3>
-      <p data-ku="کۆمەڵگەکەمان لە ساڵی 2007/2707 دامەزرابوو." data-bd="کۆمەڵگەکەمان لە ساڵی 2007/2707 دامەزرابوو." data-ar="تأسست المدرسة في عام 2007/2707." data-en="The school was founded in 2007.">کۆمەڵگەکەمان لە ساڵی 2007/2707 دامەزرابوو.</p>
-      <p data-ku="شوێنی دامەزراندن: شەقامی ۱۰۰ مەتری، گەرەکی نەورۆز، تەنیشت کۆلێژی چیھان." data-bd="شوێنی دامەزراندن: شەقامی ۱۰۰ مەتری، گەرەکی نەورۆز، تەنیشت کۆلێژی چیھان." data-ar="موقع التأسيس: شارع 100 متر، حي نوروز، بجانب كلية جيهان." data-en="Founded in: 100 Meter Street, Nawroz Neighborhood, near Cihan College.">شوێنی دامەزراندن: شەقامی ۱۰۰ مەتری، گەرەکی نەورۆز، تەنیشت کۆلێژی چیھان.</p>
+    <!-- STEP GUIDE - NO PASSWORD SHOWN -->
+    <div class="step-overlay" id="stepOverlay">
+        <div class="step-content">
+            <button class="close-step" id="closeStep"><i class="fas fa-times"></i></button>
+
+            <div class="step-header">
+                <h2><i class="fas fa-play-circle"></i> How To Use</h2>
+                <div class="counter" id="stepCounter">Step 1 of 7</div>
+            </div>
+
+            <div id="stepSlides">
+                <div class="step-slide active" data-step="0">
+                    <div class="step-card">
+                        <div class="step-num">01</div>
+                        <div class="step-title">📝 Book an Appointment</div>
+                        <div class="step-desc">
+                            Fill in your <span class="highlight">name, email, phone</span>, select a <span class="highlight">service</span>, and pick your <span class="highlight">date & time</span>.<br><br>
+                            Click <span class="highlight">"Request Appointment"</span> to submit.
+                        </div>
+                        <div class="step-icon">
+                            <i class="fas fa-calendar-check"></i>
+                            <p>Fill in the booking form on the right</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-slide" data-step="1">
+                    <div class="step-card">
+                        <div class="step-num">02</div>
+                        <div class="step-title">☰ Open the Menu</div>
+                        <div class="step-desc">
+                            Click the <span class="highlight">three lines (☰)</span> in the <span class="highlight">bottom-left corner</span>.<br><br>
+                            This opens the side menu with all features.
+                        </div>
+                        <div class="step-icon">
+                            <i class="fas fa-bars"></i>
+                            <p>Look for the ☰ icon at the bottom left</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-slide" data-step="2">
+                    <div class="step-card">
+                        <div class="step-num">03</div>
+                        <div class="step-title">🔐 Access Admin</div>
+                        <div class="step-desc">
+                            From the menu, click <span class="highlight">"Admin Panel"</span> OR use the <span class="highlight">"Admin"</span> button in the header.<br><br>
+                            <span style="color:#6a5f4e; font-size:13px;">⚠️ Admin access is restricted to authorized personnel only.</span>
+                        </div>
+                        <div class="step-icon">
+                            <i class="fas fa-lock"></i>
+                            <p>🔒 Admin panel is password protected</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-slide" data-step="3">
+                    <div class="step-card">
+                        <div class="step-num">04</div>
+                        <div class="step-title">👀 View Bookings</div>
+                        <div class="step-desc">
+                            Once logged in, the <span class="highlight">Admin Panel</span> shows all bookings.<br><br>
+                            Each booking shows: <span class="highlight">Customer, service, date/time, and status</span>.
+                        </div>
+                        <div class="step-icon">
+                            <i class="fas fa-clipboard-list"></i>
+                            <p>All bookings in one table</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-slide" data-step="4">
+                    <div class="step-card">
+                        <div class="step-num">05</div>
+                        <div class="step-title">✅ Accept or Decline</div>
+                        <div class="step-desc">
+                            Click <span class="highlight">"Accept"</span> or <span class="highlight">"Decline"</span> for each booking.<br><br>
+                            The customer gets an <span class="highlight">instant email notification</span>.
+                        </div>
+                        <div class="step-icon">
+                            <i class="fas fa-envelope"></i>
+                            <p>Auto-email sent to customer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-slide" data-step="5">
+                    <div class="step-card">
+                        <div class="step-num">06</div>
+                        <div class="step-title">📋 Activity Logs</div>
+                        <div class="step-desc">
+                            From the menu, click <span class="highlight">"Activity Logs"</span> to see all actions.<br><br>
+                            Logs include: <span class="highlight">bookings, status changes, logins, emails</span>.
+                        </div>
+                        <div class="step-icon">
+                            <i class="fas fa-history"></i>
+                            <p>Every action is tracked</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-slide" data-step="6">
+                    <div class="step-card">
+                        <div class="step-num">07</div>
+                        <div class="step-title">📍 Find Us & Contact</div>
+                        <div class="step-desc">
+                            Use <span class="highlight">"Find Us"</span> in the menu to open Google Maps.<br><br>
+                            Or click <span class="highlight">"Contact Us"</span> to call: <span class="highlight">07383 373183</span><br><br>
+                            Email: <span class="highlight">hardysha35@gmail.com</span>
+                        </div>
+                        <div class="step-icon">
+                            <i class="fas fa-map-pin"></i>
+                            <p>Find us on Google Maps</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-nav">
+                <button class="nav-btn" id="prevStep"><i class="fas fa-arrow-left"></i> Back</button>
+                <div class="dots" id="stepDots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <button class="nav-btn primary" id="nextStep">Next <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
     </div>
 
-    <div class="card">
-      <h3 data-ku="بەشەکانی کۆمەڵگە " data-bd="بەشەکانی کۆمەڵگە" data-ar="أقسام المدرسة" data-en="School departments">بەشەکانی کۆمەڵگە</h3>
-      <p data-ku="بەشەکانی کۆمەڵگە پێکهاتووە لە ( کارگێری ، ژمێریاری ، خۆیەتی )" data-bd="بەشەکانی کۆمەڵگە پێکهاتووە لە ( کارگێری ، ژمێریاری ، خۆیەتی (" data-ar="تتكون أقسام المدرسة من (الإدارة، والمحاسبة، زاتی)" data-en="The school's departments consist of (administration, accounting)">بەشەکانی کۆمەڵگە پێکهاتووە لە ( کارگێری ، ژمێریاری ، خۆیەتی ).</p>
+    <!-- HAMBURGER -->
+    <div class="hamburger" id="hamburger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
     </div>
 
-    <div class="card">
-      <h3 data-ku="پڕۆگرام و فەسیلیتەکان" data-bd="پڕۆگرام و فەسیلیتەکان" data-ar="البرامج والمرافق" data-en="Programs and Facilities">پڕۆگرام و فەسیلیتەکان</h3>
-      <p data-ku="کۆمەڵگەکەمان پڕۆگرامێکی زانستی و وەرزشی هەیە." data-bd="کۆمەڵگەکەمان پڕۆگرامێکی زانستی و وەرزشی هەیە." data-ar="تقدم المدرسة برامج علمية ورياضية." data-en="The school offers scientific and sports programs.">کۆمەڵگەکەمان پڕۆگرامێکی زانستی و وەرزشی هەیە.</p>
-    </div>
-  </div>
-</section>
+    <!-- SIDE PANEL -->
+    <div class="side-panel" id="sidePanel">
+        <h3><i class="fas fa-bars"></i> Menu</h3>
 
-<section id="news">
-  <h2 data-ku="کاروچاڵاکیەکانی ئەم ھەفتیە" 
-      data-bd="کاروچاڵاکیەکانی ئەم ھەفتیە" 
-      data-ar="النشاطات الأسبوعية" 
-      data-en="Weekly Activities">
-      کاروچاڵاکیەکانی ئەم ھەفتیە
-  </h2>
+        <div class="menu-item" id="menuAdmin">
+            <i class="fas fa-user-cog"></i> Admin Panel
+            <span class="badge" id="adminBadge">🔒 Locked</span>
+        </div>
 
-  <div class="grid">
-    <div class="card">
-      <h3 data-ku="کۆمەڵگەکەمان کراوەیە" data-bd="کۆمەڵگەکەمان کراوەیە" data-ar="المدرسة مفتوحة" data-en="School is open">کۆمەڵگەکەمان کراوەیە</h3>
-      <p data-ku="کۆمەڵگەکەمان بە شێوەی ئاسایی کراوە و خوێندن بەردەوامە." data-bd="کۆمەڵگەکەمان بە شێوەی ئاسایی کراوە و خوێندن بەردەوامە." data-ar="المدرسة مفتوحة كالمعتاد والدراسة مستمرة." data-en="School is open as usual and studies continue.">کۆمەڵگەکەمان بە شێوەی ئاسایی کراوە و خوێندن بەردەوامە.</p>
-    </div>
+        <div class="menu-item" id="menuLogs">
+            <i class="fas fa-history"></i> Activity Logs
+            <span class="badge" id="logBadge">0</span>
+        </div>
 
-    <div class="card">
-      <h3 data-ku="چاڵاکیەکان" data-bd="چاڵاکیەکان" data-ar="النشاطات" data-en="Activities">چاڵاکیەکان</h3>
-      <p data-ku="۱- گەشتێکی زانستی بۆ ناو لاپەڕەکانی مێژوو لە یادی ۱۲۸ ساڵی ڕۆژنامەگەری کوردی." data-bd="۱- گەشتێکی زانستی بۆ ناو لاپەڕەکانی مێژوو لە یادی ۱۲۸ ساڵی ڕۆژنامەگەری کوردی." data-ar="١- رحلة علمية بمناسبة مرور 128 سنة على الصحافة الكوردية." data-en="1- A scientific trip for the 128th anniversary of Kurdish journalism.">۱- گەشتێکی زانستی بۆ ناو لاپەڕەکانی مێژوو لە یادی ۱۲۸ ساڵی ڕۆژنامەگەری کوردی.</p>
-      <p data-ku="۲- ژینگەپارێزی لە پێشینەی کارەکانمانە." data-bd="۲- ژینگەپارێزی لە پێشینەی کارەکانمانە." data-ar="٢- حماية البيئة من أولوياتنا." data-en="2- Environmental protection is one of our priorities.">۲- ژینگەپارێزی لە پێشینەی کارەکانمانە.</p>
-      <p data-ku="۳- زیاتر لە ۱۰۰ نەمام لە گۆڕەپانی کۆمەڵگا چێنرا." data-bd="۳- زیاتر لە ۱۰۰ نەمام لە گۆڕەپانی کۆمەڵگا چێنرا." data-ar="٣- تمت زراعة أكثر من 100 شتلة في ساحة المدرسة." data-en="3- More than 100 seedlings were planted in the school yard.">۳- زیاتر لە ۱۰۰ نەمام لە گۆڕەپانی کۆمەڵگا چێنرا.</p>
-      <p data-ku="٤- چاودێری سەردانی مەیدانی لێژنەی ژینگە و تەندروستی بۆ کافتریای قوتابخانە." data-bd="۴- چاودێری سەردانی مەیدانی لێژنەی ژینگە و تەندروستی بۆ کافتریای قوتابخانە." data-ar="٤- متابعة زيارة لجنة البيئة والصحة إلى كافتيريا المدرسة." data-en="4- Monitoring the field visit of the environment and health committee to the school cafeteria.">۴- چاودێری سەردانی مەیدانی لێژنەی ژینگە و تەندروستی بۆ کافتریای قوتابخانە.</p>
-      <p data-ku="۵- ڕێنمایی کردنی قوتابیان بۆ کاتی تاقیکردنەوەکان." data-bd="۵- ڕێنمایی کردنی قوتابیان بۆ کاتی تاقیکردنەوەکان." data-ar="٥- إرشاد الطلاب خلال فترة الامتحانات." data-en="5- Guiding students during exam time.">۵- ڕێنمایی کردنی قوتابیان بۆ کاتی تاقیکردنەوەکان.</p>
-    </div>
-  </div>
-</section>
+        <div class="menu-item" id="menuFindUs">
+            <i class="fas fa-map-pin"></i> Find Us
+            <span class="badge">📍 Map</span>
+        </div>
 
-<section id="info">
-  <h2 data-ku="زانیاری زیاتر" data-bd="زانیاری زیاتر" data-ar="معلومات إضافية" data-en="Additional Info">زانیاری زیاتر</h2>
+        <div class="menu-item" id="menuGuide">
+            <i class="fas fa-play-circle"></i> Video Guide
+            <span class="badge">▶️ Watch</span>
+        </div>
 
-  <div class="grid">
-    <div class="card">
-      <h3 data-ku="ژمارەی خوێندکاران" data-bd="ژمارەی خوێندکاران" data-ar="عدد الطلاب" data-en="Number of Students">ژمارەی خوێندکاران</h3>
-      <p data-ku="بە هەرسێ بەشی بنەرەتی و ناوەندی و دواناوەندی ۱۲۰۰ قوتابی." data-bd="بە هەرسێ بەشی بنەرەتی و ناوەندی و دواناوەندی ۱۲۰۰ قوتابی." data-ar="يضم المجمع 1200 طالب في الأقسام الأساسية والمتوسطة والإعدادية." data-en="The school has 1200 students across primary, middle, and high school sections.">بە هەرسێ بەشی بنەرەتی و ناوەندی و دواناوەندی ۱۲۰۰ قوتابی.</p>
-    </div>
+        <div class="menu-item" id="menuContact">
+            <i class="fas fa-phone"></i> Contact Us
+            <span class="badge">📞 Call</span>
+        </div>
 
-    <div class="card">
-      <h3 data-ku="مامۆستایان و فەرمانبەران" data-bd="مامۆستایان" data-ar="المعلمون" data-en="Teachers">مامۆستایان و فەرمانبەران</h3>
-      <p data-ku="ژمارەی مامۆستا و فەرمانبەرانی کۆمەڵگا پێکهاتووە لە ۱٦۰ فەرمانبەر." data-bd="ژمارەی مامۆستا و فەرمانبەرانی کۆمەڵگا پێکهاتووە لە ۱۶۰ فەرمانبەر." data-ar="عدد المعلمين والموظفين في المجمع هو 160 موظفًا." data-en="The school has 160 teachers and staff members.">ژمارەی مامۆستا و فەرمانبەرانی کۆمەڵگا پێکهاتووە لە ۱۶۰ فەرمانبەر.</p>
+        <div class="panel-footer">
+            <i class="fas fa-envelope"></i> hardysha35@gmail.com<br>
+            <i class="fas fa-phone"></i> 07383 373183<br>
+            <i class="fas fa-map-pin"></i> Find us on Google Maps
+        </div>
+
+        <div id="logEntries" style="margin-top:15px; padding-top:15px; border-top:1px solid rgba(42,37,32,0.3); display:none;">
+            <h4 style="color:#f5d793; font-size:14px; margin-bottom:10px;"><i class="fas fa-list"></i> Recent Activity</h4>
+            <div id="logList"></div>
+        </div>
     </div>
 
-    <div class="card">
-      <h3 data-ku="کلیلی قوتابخانە" data-bd="کلیلی قوتابخانە" data-ar="شعار المدرسة" data-en="School Motto">کلیلی قوتابخانە</h3>
-      <p data-ku="بە زانینەوە بۆ پێشکەوتن." data-bd="بە زانینەوە بۆ پێشکەوتن." data-ar="بالعلم نحو التقدم." data-en="With knowledge towards progress.">بە زانینەوە بۆ پێشکەوتن.</p>
+    <!-- MAIN -->
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-cut"></i> Royal Fade Barbers
+            </div>
+            <div class="header-btns">
+                <button id="adminBtn"><i class="fas fa-user-cog"></i> Admin</button>
+                <a href="https://maps.app.goo.gl/DyS7sBecgpLcm8rE7?g_st=ic" target="_blank"><i class="fas fa-map-pin"></i> Find us</a>
+            </div>
+        </header>
+
+        <div class="contact-bar">
+            <span><i class="fas fa-phone-alt"></i> <a href="tel:07383373183">07383 373183</a></span>
+            <span><i class="fas fa-clock"></i> Mon–Sat · 9am – 7pm</span>
+            <span><i class="fas fa-envelope"></i> <a href="mailto:hardysha35@gmail.com">hardysha35@gmail.com</a></span>
+            <span><i class="fas fa-location-dot"></i> <a href="https://maps.app.goo.gl/DyS7sBecgpLcm8rE7?g_st=ic" target="_blank">Google Maps</a></span>
+        </div>
+
+        <div class="grid">
+            <!-- PRICE LIST -->
+            <div class="card animate-slide-left delay-1">
+                <h2><i class="fas fa-tags"></i> Price List <span class="animate-wiggle" style="font-size:20px;">👆</span></h2>
+                <div class="price-grid">
+                    <div class="price-item" data-service="Basic Gents Cut" data-price="£14.00" data-icon="💇‍♂️" data-desc="Classic clean cut" data-stars="⭐⭐⭐⭐">
+                        <span class="service">Basic Gents Cut</span>
+                        <span class="price">£14.00</span>
+                    </div>
+                    <div class="price-item" data-service="Skin Fade" data-price="£16.00" data-icon="✂️" data-desc="Smooth fade from skin" data-stars="⭐⭐⭐⭐⭐">
+                        <span class="service">Skin Fade</span>
+                        <span class="price">£16.00</span>
+                    </div>
+                    <div class="price-item" data-service="Hair Cut & Beard" data-price="£27.00" data-icon="🧔" data-desc="Full style & beard trim" data-stars="⭐⭐⭐⭐⭐">
+                        <span class="service">Hair Cut & Beard</span>
+                        <span class="price">£27.00</span>
+                    </div>
+                    <div class="price-item" data-service="Kids Cut" data-price="£12.00" data-icon="👦" data-desc="Perfect for little ones" data-stars="⭐⭐⭐⭐">
+                        <span class="service">Kids Cut</span>
+                        <span class="price">£12.00</span>
+                    </div>
+                    <div class="price-item" data-service="Kids Zero Skin Fade" data-price="£14.00" data-icon="👶" data-desc="Zero fade for kids" data-stars="⭐⭐⭐⭐">
+                        <span class="service">Kids Zero Skin Fade</span>
+                        <span class="price">£14.00</span>
+                    </div>
+                    <div class="price-item" data-service="All Over" data-price="£10.00" data-icon="🔄" data-desc="Quick all-over trim" data-stars="⭐⭐⭐">
+                        <span class="service">All Over</span>
+                        <span class="price">£10.00</span>
+                    </div>
+                    <div class="price-item" data-service="Beard Trim (Wet Steam)" data-price="£12.00" data-icon="💨" data-desc="Luxury wet shave" data-stars="⭐⭐⭐⭐⭐">
+                        <span class="service">Beard Trim (Wet Steam)</span>
+                        <span class="price">£12.00</span>
+                    </div>
+                    <div class="price-item" data-service="Beard Dry Shave" data-price="£11.00" data-icon="🪒" data-desc="Quick dry trim" data-stars="⭐⭐⭐⭐">
+                        <span class="service">Beard Dry Shave</span>
+                        <span class="price">£11.00</span>
+                    </div>
+                    <div class="price-item" data-service="Face Mask" data-price="£5.00" data-icon="🧖" data-desc="Deep cleansing mask" data-stars="⭐⭐⭐⭐">
+                        <span class="service">Face Mask</span>
+                        <span class="price">£5.00</span>
+                    </div>
+                    <div class="price-item" data-service="Ear Wax" data-price="£5.00" data-icon="👂" data-desc="Gentle ear wax removal" data-stars="⭐⭐⭐">
+                        <span class="service">Ear Wax</span>
+                        <span class="price">£5.00</span>
+                    </div>
+                    <div class="price-item" data-service="Nose Wax" data-price="£5.00" data-icon="👃" data-desc="Quick nose wax" data-stars="⭐⭐⭐">
+                        <span class="service">Nose Wax</span>
+                        <span class="price">£5.00</span>
+                    </div>
+                    <div class="price-item" data-service="Threading" data-price="£5.00" data-icon="🧵" data-desc="Precise threading" data-stars="⭐⭐⭐⭐">
+                        <span class="service">Threading</span>
+                        <span class="price">£5.00</span>
+                    </div>
+                    <div class="price-item" data-service="Hair Colour" data-price="£20.00" data-icon="🎨" data-desc="Full hair colour" data-stars="⭐⭐⭐⭐⭐">
+                        <span class="service">Hair Colour</span>
+                        <span class="price">£20.00</span>
+                    </div>
+                    <div class="price-item" data-service="Beard Colour" data-price="£20.00" data-icon="🌈" data-desc="Beard colouring" data-stars="⭐⭐⭐⭐⭐">
+                        <span class="service">Beard Colour</span>
+                        <span class="price">£20.00</span>
+                    </div>
+                    <div class="price-item" data-service="Facial with Steam" data-price="£20.00" data-icon="🧖‍♂️" data-desc="Steam facial treatment" data-stars="⭐⭐⭐⭐⭐">
+                        <span class="service">Facial with Steam</span>
+                        <span class="price">£20.00</span>
+                    </div>
+                    <div class="price-item" data-service="Full Service Offer" data-price="£40.00" data-icon="⭐" data-desc="The ultimate package" data-stars="⭐⭐⭐⭐⭐" style="font-weight:600; color:#f5d793;">
+                        <span class="service">⭐ Full Service Offer</span>
+                        <span class="price" style="font-weight:700;">£40.00</span>
+                    </div>
+                </div>
+
+                <!-- HAIRCUT DISPLAY - REAL PHOTO STYLE -->
+                <div class="haircut-display" id="haircutDisplay">
+                    <div class="haircut-preview">
+                        <div class="preview-icon" id="previewIcon">✂️</div>
+                        <div class="preview-info">
+                            <div class="name" id="previewName">Select a haircut</div>
+                            <div class="price" id="previewPrice">👆 Click any service to preview</div>
+                            <div class="desc" id="previewDesc">See what style suits you</div>
+                            <div class="stars" id="previewStars">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="price-special">
+                    <strong>💎 Full Service Offer:</strong> Hair Cut & Beard, Full Facial Steam, Warm Wax, Face Mask, Ear Flame, Nose Wax, Head Massage, Hair Wash, Threading.
+                </div>
+                <div class="free-drink">
+                    <i class="fas fa-mug-hot"></i> "Help yourself to a drink" — <em>the drink is free</em> 🍺
+                </div>
+            </div>
+
+            <!-- BOOKING FORM -->
+            <div class="card animate-fade-up delay-2">
+                <h2><i class="fas fa-scissors"></i> Book Your Cut <span class="animate-rainbow">✨</span></h2>
+                <form id="bookingForm">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="fullName" placeholder="James Carter" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="emailInput" placeholder="customer@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="phoneInput" placeholder="07383 373183">
+                    </div>
+                    <div class="form-group">
+                        <label>Service</label>
+                        <select id="serviceSelect">
+                            <option value="Basic Gents Cut">Basic Gents Cut</option>
+                            <option value="Skin Fade">Skin Fade</option>
+                            <option value="Hair Cut & Beard" selected>Hair Cut & Beard</option>
+                            <option value="Kids Cut">Kids Cut</option>
+                            <option value="Kids Zero Skin Fade">Kids Zero Skin Fade</option>
+                            <option value="All Over">All Over</option>
+                            <option value="Beard Trim (Wet Steam Shave)">Beard Trim (Wet Steam Shave)</option>
+                            <option value="Beard Dry Shave">Beard Dry Shave</option>
+                            <option value="Face Mask">Face Mask</option>
+                            <option value="Ear Wax">Ear Wax</option>
+                            <option value="Nose Wax">Nose Wax</option>
+                            <option value="Threading">Threading</option>
+                            <option value="Hair Colour">Hair Colour</option>
+                            <option value="Beard Colour">Beard Colour</option>
+                            <option value="Facial with Steam">Facial with Steam</option>
+                            <option value="Full Service Offer">⭐ Full Service Offer</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Preferred Date</label>
+                        <input type="date" id="dateInput">
+                    </div>
+                    <div class="form-group">
+                        <label>Preferred Time</label>
+                        <input type="time" id="timeInput" value="14:00">
+                    </div>
+                    <div class="form-group">
+                        <label>Extra Notes</label>
+                        <textarea id="notesInput" placeholder="Any special requests..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary"><i class="fas fa-calendar-check"></i> Request Appointment 🚀</button>
+                </form>
+            </div>
+
+            <!-- ADMIN PANEL -->
+            <div id="adminPanel" class="card animate-slide-right delay-3">
+                <h2><i class="fas fa-clipboard-list"></i> Admin · Requests <span class="animate-wiggle">📋</span></h2>
+                <p style="color:#a0907e; font-size:13px; margin-bottom:15px;">
+                    <i class="fas fa-info-circle"></i> Accept or decline — customer gets email from <strong style="color:#c9a86c;">hardysha35@gmail.com</strong>
+                </p>
+                <div class="admin-table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Customer</th>
+                                <th>Service</th>
+                                <th>Date / Time</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminTableBody">
+                            <tr><td colspan="5" class="empty-msg">No bookings yet. 📭</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="admin-actions">
+                    <button class="btn-secondary" id="refreshBtn"><i class="fas fa-sync"></i> Refresh</button>
+                    <button class="btn-secondary" id="clearBtn" style="border-color:#5a3a3a; color:#d48e8e;"><i class="fas fa-trash-alt"></i> Clear All</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <i class="fas fa-crown"></i> Royal Fade Barbers · Premium Grooming ✨
+        </div>
     </div>
-  </div>
-</section>
 
-<section id="contact">
-  <h2 data-ku="ناونیشانی کۆمەڵگا" data-bd="ناونیشانی کۆمەڵگا" data-ar="العنوان" data-en="Contact">ناونیشانی کۆمەڵگا</h2>
+    <!-- TOAST -->
+    <div class="toast" id="toast"><i class="fas fa-check-circle"></i> <span id="toastMsg">Done</span></div>
 
-  <div class="grid">
-    <div class="card">
-      <h3 data-ku="ناونیشان" data-bd="ناونیشان" data-ar="العنوان" data-en="Address">ناونیشان</h3>
-      <p data-ku="شەقامی ۱۰۰ مەتری، گەرەکی نەورۆز، تەنیشت کۆلێژی چیھان." data-bd="شەقامی ۱۰۰ مەتری، گەرەکی نەورۆز، تەنیشت کۆلێژی چیھان." data-ar="شارع 100 متر، حي نوروز، بجانب كلية جيهان." data-en="100 Meter Street, Nawroz Neighborhood, near Cihan College.">شەقامی ۱۰۰ مەتری، گەرەکی نەورۆز، تەنیشت کۆلێژی چیھان.</p>
-    </div>
+    <script>
+        // ============================================================
+        // CONFIG
+        // ============================================================
+        const ADMIN_PASSWORD = 'royal89796959';
+        const BARBER_EMAIL = 'hardysha35@gmail.com';
+        const STORAGE_KEY = 'royalFadeBookings';
+        const LOGS_KEY = 'royalFadeLogs';
 
-    <div class="card">
-      <h3 data-ku="ئیمەیڵ" data-bd="ئیمەیڵ" data-ar="البريد الإلكتروني" data-en="Email">ئیمەیڵ</h3>
-      <p>shahid.fakhir@school.com</p>
-    </div>
+        // ============================================================
+        // STATE
+        // ============================================================
+        let bookings = [];
+        let logs = [];
+        let isAdminLoggedIn = false;
+        let isSideOpen = false;
+        let currentStep = 0;
+        const totalSteps = 7;
 
-    <div class="card">
-      <h3 data-ku="ژمارەی تەلەفۆن" data-bd="ژمارەی تەلەفۆن" data-ar="الهاتف" data-en="Phone">ژمارەی تەلەفۆن</h3>
-      <p>0751 430 9063</p>
-    </div>
-  </div>
-</section>
+        // ============================================================
+        // DOM REFS
+        // ============================================================
+        const adminPanel = document.getElementById('adminPanel');
+        const adminBtn = document.getElementById('adminBtn');
+        const loginOverlay = document.getElementById('loginOverlay');
+        const loginBtn = document.getElementById('loginBtn');
+        const adminPass = document.getElementById('adminPass');
+        const loginError = document.getElementById('loginError');
+        const hamburger = document.getElementById('hamburger');
+        const sidePanel = document.getElementById('sidePanel');
+        const toast = document.getElementById('toast');
+        const toastMsg = document.getElementById('toastMsg');
+        const adminBadge = document.getElementById('adminBadge');
+        const stepOverlay = document.getElementById('stepOverlay');
+        const closeStep = document.getElementById('closeStep');
+        const welcomeOverlay = document.getElementById('welcomeOverlay');
+        const enterBtn = document.getElementById('enterBtn');
+        const haircutDisplay = document.getElementById('haircutDisplay');
+        const previewIcon = document.getElementById('previewIcon');
+        const previewName = document.getElementById('previewName');
+        const previewPrice = document.getElementById('previewPrice');
+        const previewDesc = document.getElementById('previewDesc');
+        const previewStars = document.getElementById('previewStars');
 
-<div class="music-container">
-  <div class="music-title">🎵 هەر کوردین و هەر کورد ئەبین</div>
-  <iframe 
-    src="https://archive.org/embed/har-kurdin-w-har-kurd-abin" 
-    width="100%" 
-    height="60" 
-    frameborder="0" 
-    allowfullscreen 
-    class="music-iframe">
-  </iframe>
-  <div class="music-note">🔊 کرتە لەسەر دەنگی بکە بۆ گوێگرتن</div>
-</div>
+        // ============================================================
+        // WELCOME SCREEN
+        // ============================================================
+        if (!localStorage.getItem('welcomeShown')) {
+            welcomeOverlay.classList.add('active');
+            launchConfetti();
+        }
 
-<footer>
-  <p data-ku="©️ created by las gevara ٢٠٢٦ کۆمەڵگەی شەهید فەخیر مەرگەسۆری. هەموو مافەکان پارێزراون." 
-     data-bd="©️ created by las gevara ٢٠٢٦ کۆمەڵگەی شەهید فەخیر مەرگەسۆری. هەموو مافەکان پارێزراون." 
-     data-ar="©️ created by las gevara ٢٠٢٦ مدرسة شهيد فخري مرگەصوري. جميع الحقوق محفوظة." 
-     data-en="©️ created by las gevara 2026 Shahid Fakhir Mergasori School. All rights reserved.">
-     ©️ created by las gevara ٢٠٢٦ کۆمەڵگەی شەهید فەخیر مەرگەسۆری. هەموو مافەکان پارێزراون.
-  </p>
-</footer>
+        enterBtn.addEventListener('click', function() {
+            welcomeOverlay.classList.remove('active');
+            localStorage.setItem('welcomeShown', 'true');
+            addLog('👋 Welcome', 'User entered the shop');
+            launchConfetti();
+            setTimeout(() => {
+                currentStep = 0;
+                updateStep();
+                stepOverlay.classList.add('active');
+                addLog('📺 First visit', 'Video guide shown');
+            }, 800);
+        });
 
-<script>
-function changeLanguage(lang){
-  document.body.lang = lang;
-  document.body.dir = lang === 'en' ? 'ltr' : 'rtl';
+        // ============================================================
+        // HAIRCUT PREVIEW - REAL PHOTO STYLE
+        // ============================================================
+        document.querySelectorAll('.price-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const service = this.dataset.service;
+                const price = this.dataset.price;
+                const icon = this.dataset.icon || '✂️';
+                const desc = this.dataset.desc || 'Premium haircut service';
+                const stars = this.dataset.stars || '⭐⭐⭐⭐⭐';
 
-  const elements = document.querySelectorAll('[data-ku]');
-  elements.forEach(el => {
-    const translation = el.getAttribute('data-' + lang);
-    if(translation){
-      el.innerText = translation;
-    }
-  });
-}
+                haircutDisplay.classList.add('show');
+                previewIcon.textContent = icon;
+                previewName.textContent = service;
+                previewPrice.textContent = price;
+                previewDesc.textContent = desc;
+                previewStars.textContent = stars;
 
-changeLanguage('ku');
-</script>
+                // Glow effect on click
+                haircutDisplay.style.borderColor = '#c9a86c';
+                haircutDisplay.style.boxShadow = '0 0 30px rgba(201, 168, 108, 0.2)';
+                setTimeout(() => {
+                    haircutDisplay.style.borderColor = 'rgba(201, 168, 108, 0.15)';
+                    haircutDisplay.style.boxShadow = 'none';
+                }, 1500);
+
+                // Update the select dropdown
+                const select = document.getElementById('serviceSelect');
+                for (let option of select.options) {
+                    if (option.text === service || option.text === '⭐ ' + service) {
+                        select.value = option.value;
+                        break;
+                    }
+                }
+
+                showToast(`✂️ ${service} - ${price} ${stars}`);
+                addLog(`👆 Previewed`, `${service} - ${price}`);
+            });
+        });
+
+        // ============================================================
+        // DATA FUNCTIONS
+        // ============================================================
+        function loadBookings() {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            if (stored) {
+                try { bookings = JSON.parse(stored); } catch (e) { bookings = []; }
+            } else {
+                bookings = [
+                    { id: '1', name: 'Leo Mitchell', email: 'leo@example.com', phone: '07123 456789', service: 'Skin Fade', date: '2026-08-20', time: '10:30', notes: 'First time', status: 'pending' },
+                    { id: '2', name: 'Samir Khan', email: 'samir@example.com', phone: '07383 373183', service: 'Hair Cut & Beard', date: '2026-08-21', time: '15:45', notes: '', status: 'accepted' }
+                ];
+                saveBookings();
+            }
+            renderTable();
+        }
+
+        function saveBookings() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(bookings));
+        }
+
+        function loadLogs() {
+            const stored = localStorage.getItem(LOGS_KEY);
+            if (stored) {
+                try { logs = JSON.parse(stored); } catch (e) { logs = []; }
+            }
+            updateLogDisplay();
+        }
+
+        function saveLogs() {
+            localStorage.setItem(LOGS_KEY, JSON.stringify(logs));
+            updateLogDisplay();
+        }
+
+        function addLog(action, details) {
+            logs.unshift({
+                id: Date.now().toString(36) + Math.random().toString(36).slice(2, 4),
+                time: new Date().toLocaleString(),
+                action: action,
+                details: details || ''
+            });
+            if (logs.length > 100) logs = logs.slice(0, 100);
+            saveLogs();
+        }
+
+        function updateLogDisplay() {
+            const badge = document.getElementById('logBadge');
+            const list = document.getElementById('logList');
+            const entries = document.getElementById('logEntries');
+            if (badge) badge.textContent = logs.length;
+            if (list) {
+                if (logs.length === 0) {
+                    list.innerHTML = '<div style="color:#6a5f4e; font-size:12px; padding:8px 0;">No activity yet</div>';
+                    if (entries) entries.style.display = 'none';
+                } else {
+                    if (entries) entries.style.display = 'block';
+                    let html = '';
+                    logs.slice(0, 15).forEach(log => {
+                        html += `<div class="log-entry">
+                            <span class="log-time">${log.time}</span> · 
+                            <span class="log-action">${log.action}</span>
+                            ${log.details ? `<br><span style="color:#7a6e5e; font-size:11px;">${log.details}</span>` : ''}
+                        </div>`;
+                    });
+                    list.innerHTML = html;
+                }
+            }
+        }
+
+        function genId() {
+            return Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+        }
+
+        // ============================================================
+        // RENDER TABLE
+        // ============================================================
+        function renderTable() {
+            const tbody = document.getElementById('adminTableBody');
+            if (!tbody) return;
+
+            if (bookings.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="empty-msg">No bookings yet. 📭</td></tr>';
+                return;
+            }
+
+            let html = '';
+            bookings.forEach(b => {
+                const statusClass = b.status === 'accepted' ? 'accepted' : (b.status === 'declined' ? 'declined' : '');
+                const statusLabel = b.status.charAt(0).toUpperCase() + b.status.slice(1);
+                html += `<tr>
+                    <td>
+                        <strong>${escapeHtml(b.name)}</strong><br>
+                        <span style="font-size:11px; color:#7a6e5e;">${escapeHtml(b.email || 'no email')}</span>
+                        <br><span style="font-size:11px; color:#5a4f3e;">${escapeHtml(b.phone || '')}</span>
+                    </td>
+                    <td>${escapeHtml(b.service)}</td>
+                    <td>${escapeHtml(b.date)} · ${escapeHtml(b.time)}</td>
+                    <td><span class="status-badge ${statusClass}">${statusLabel}</span></td>
+                    <td>
+                        <div class="action-btns">
+                            ${b.status === 'pending' ? `
+                                <button class="accept-btn" data-id="${b.id}"><i class="fas fa-check"></i> Accept</button>
+                                <button class="decline-btn" data-id="${b.id}"><i class="fas fa-times"></i> Decline</button>
+                            ` : `
+                                <span style="color:#5a4f3e; font-size:11px;">${b.status === 'accepted' ? '✅ Confirmed' : '❌ Declined'}</span>
+                            `}
+                        </div>
+                    </td>
+                </tr>`;
+            });
+            tbody.innerHTML = html;
+
+            document.querySelectorAll('.accept-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    updateStatus(this.getAttribute('data-id'), 'accepted');
+                });
+            });
+            document.querySelectorAll('.decline-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    updateStatus(this.getAttribute('data-id'), 'declined');
+                });
+            });
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // ============================================================
+        // SEND EMAIL
+        // ============================================================
+        function sendEmail(booking, status) {
+            const statusText = status === 'accepted' ? '✅ ACCEPTED' : '❌ DECLINED';
+            const msg = status === 'accepted' ?
+                '🎉 Great news! Your appointment has been CONFIRMED!' :
+                '😔 We regret to inform you that your appointment could not be accommodated.';
+
+            const subject = `Royal Fade Barbers - Appointment ${statusText}`;
+            const body = `
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        ✂️ ROYAL FADE BARBERS ✂️
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        Hello ${booking.name},
+
+        ${msg}
+
+        📋 APPOINTMENT DETAILS:
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        Service:   ${booking.service}
+        Date:      ${booking.date}
+        Time:      ${booking.time}
+        Phone:     ${booking.phone || 'Not provided'}
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        📍 Location: Find us on Google Maps
+        📞 Phone:    07383 373183
+        ✉️ Email:    hardysha35@gmail.com
+
+        Thank you for choosing Royal Fade Barbers!
+
+        Best regards,
+        The Royal Fade Team 👑
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        `;
+
+            const mailtoLink = `mailto:${booking.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.open(mailtoLink, '_blank');
+            addLog(`📧 Email sent`, `${booking.name} - ${statusText}`);
+            showToast(`📧 Email sent to ${booking.email}`);
+        }
+
+        // ============================================================
+        // UPDATE STATUS
+        // ============================================================
+        function updateStatus(id, status) {
+            const booking = bookings.find(b => b.id === id);
+            if (!booking) {
+                showToast('Booking not found');
+                return;
+            }
+
+            booking.status = status;
+            saveBookings();
+            renderTable();
+            addLog(`📋 ${status}`, `${booking.name} - ${booking.service}`);
+            showToast(`Booking ${status} for ${booking.name}`);
+
+            if (booking.email) {
+                sendEmail(booking, status);
+            } else {
+                showToast('⚠️ No email address for this customer');
+            }
+
+            if (status === 'accepted') launchConfetti();
+        }
+
+        // ============================================================
+        // CONFETTI
+        // ============================================================
+        function launchConfetti() {
+            const container = document.getElementById('confettiContainer');
+            const colors = ['#c9a86c', '#f5d793', '#dbb97a', '#ffffff', '#ffd700', '#ff6b6b', '#4ecdc4', '#ff9ff3', '#54a0ff'];
+            for (let i = 0; i < 100; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'confetti';
+                piece.style.left = Math.random() * 100 + '%';
+                piece.style.top = '-10px';
+                piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                piece.style.width = (Math.random() * 12 + 4) + 'px';
+                piece.style.height = (Math.random() * 12 + 4) + 'px';
+                piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                piece.style.animationDuration = (Math.random() * 2.5 + 2) + 's';
+                piece.style.animationDelay = (Math.random() * 2) + 's';
+                container.appendChild(piece);
+                setTimeout(() => piece.remove(), 5000);
+            }
+        }
+
+        // ============================================================
+        // TOAST
+        // ============================================================
+        function showToast(msg) {
+            toastMsg.textContent = msg;
+            toast.classList.add('show');
+            clearTimeout(toast._hide);
+            toast._hide = setTimeout(() => toast.classList.remove('show'), 5000);
+        }
+
+        // ============================================================
+        // ADMIN LOGIN
+        // ============================================================
+        function showLogin() {
+            loginOverlay.classList.add('active');
+            adminPass.value = '';
+            loginError.style.display = 'none';
+            adminPass.focus();
+        }
+
+        function hideLogin() {
+            loginOverlay.classList.remove('active');
+        }
+
+        function attemptLogin() {
+            if (adminPass.value === ADMIN_PASSWORD) {
+                isAdminLoggedIn = true;
+                hideLogin();
+                adminPanel.classList.add('active');
+                adminBadge.textContent = '🔓 Unlocked';
+                adminBadge.style.color = '#8ed4a8';
+                adminBtn.innerHTML = '<i class="fas fa-user-cog"></i> Close Admin';
+                addLog('🔓 Admin login', 'Successful login');
+                showToast('🔓 Admin access granted 🎉');
+                launchConfetti();
+                if (isSideOpen) {
+                    sidePanel.classList.remove('active');
+                    isSideOpen = false;
+                }
+                renderTable();
+            } else {
+                loginError.style.display = 'block';
+                adminPass.value = '';
+                adminPass.focus();
+                addLog('❌ Failed login', 'Incorrect password');
+            }
+        }
+
+        // ============================================================
+        // STEP GUIDE
+        // ============================================================
+        function updateStep() {
+            const slides = document.querySelectorAll('.step-slide');
+            const dots = document.querySelectorAll('.dot');
+            const counter = document.getElementById('stepCounter');
+            const prevBtn = document.getElementById('prevStep');
+            const nextBtn = document.getElementById('nextStep');
+
+            slides.forEach((s, i) => s.classList.toggle('active', i === currentStep));
+            dots.forEach((d, i) => d.classList.toggle('active', i === currentStep));
+            counter.textContent = `Step ${currentStep + 1} of ${totalSteps}`;
+            prevBtn.disabled = currentStep === 0;
+
+            if (currentStep === totalSteps - 1) {
+                nextBtn.innerHTML = '🎉 Done!';
+                nextBtn.style.background = '#2b7a4b';
+                nextBtn.style.color = 'white';
+            } else {
+                nextBtn.innerHTML = 'Next <i class="fas fa-arrow-right"></i>';
+                nextBtn.style.background = 'linear-gradient(135deg, #c9a86c, #dbb97a)';
+                nextBtn.style.color = '#0a0908';
+            }
+        }
+
+        function goToStep(step) {
+            if (step < 0 || step >= totalSteps) return;
+            currentStep = step;
+            updateStep();
+        }
+
+        function nextStep() {
+            if (currentStep === totalSteps - 1) {
+                stepOverlay.classList.remove('active');
+                addLog('🎉 Completed guide', 'User finished tutorial');
+                launchConfetti();
+                showToast('🎉 You\'re ready to go!');
+                return;
+            }
+            goToStep(currentStep + 1);
+        }
+
+        function prevStep() {
+            goToStep(currentStep - 1);
+        }
+
+        // ============================================================
+        // EVENTS
+        // ============================================================
+
+        // Admin button
+        adminBtn.addEventListener('click', function() {
+            if (!isAdminLoggedIn) {
+                showLogin();
+                return;
+            }
+            adminPanel.classList.toggle('active');
+            this.innerHTML = adminPanel.classList.contains('active') ?
+                '<i class="fas fa-user-cog"></i> Close Admin' :
+                '<i class="fas fa-user-cog"></i> Admin';
+            if (adminPanel.classList.contains('active')) renderTable();
+        });
+
+        loginBtn.addEventListener('click', attemptLogin);
+        adminPass.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') attemptLogin();
+        });
+
+        // Hamburger Menu
+        hamburger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (sidePanel.classList.contains('active')) {
+                sidePanel.classList.remove('active');
+                isSideOpen = false;
+            } else {
+                sidePanel.classList.add('active');
+                isSideOpen = true;
+                updateLogDisplay();
+            }
+        });
+
+        document.addEventListener('click', function(e) {
+            if (isSideOpen && !sidePanel.contains(e.target) && !hamburger.contains(e.target)) {
+                sidePanel.classList.remove('active');
+                isSideOpen = false;
+            }
+        });
+
+        // Side panel items
+        document.getElementById('menuAdmin').addEventListener('click', function() {
+            sidePanel.classList.remove('active');
+            isSideOpen = false;
+            if (!isAdminLoggedIn) {
+                showLogin();
+                return;
+            }
+            adminPanel.classList.toggle('active');
+            adminBtn.innerHTML = adminPanel.classList.contains('active') ?
+                '<i class="fas fa-user-cog"></i> Close Admin' :
+                '<i class="fas fa-user-cog"></i> Admin';
+            if (adminPanel.classList.contains('active')) renderTable();
+        });
+
+        document.getElementById('menuLogs').addEventListener('click', function() {
+            const entries = document.getElementById('logEntries');
+            if (entries.style.display === 'none') {
+                entries.style.display = 'block';
+            } else {
+                entries.style.display = 'none';
+            }
+            updateLogDisplay();
+        });
+
+        document.getElementById('menuFindUs').addEventListener('click', function() {
+            window.open('https://maps.app.goo.gl/DyS7sBecgpLcm8rE7?g_st=ic', '_blank');
+            sidePanel.classList.remove('active');
+            isSideOpen = false;
+        });
+
+        document.getElementById('menuGuide').addEventListener('click', function() {
+            sidePanel.classList.remove('active');
+            isSideOpen = false;
+            currentStep = 0;
+            updateStep();
+            stepOverlay.classList.add('active');
+            addLog('📺 Viewed guide', 'Video guide opened');
+        });
+
+        document.getElementById('menuContact').addEventListener('click', function() {
+            window.location.href = 'tel:07383373183';
+            sidePanel.classList.remove('active');
+            isSideOpen = false;
+        });
+
+        // Step guide
+        document.getElementById('prevStep').addEventListener('click', prevStep);
+        document.getElementById('nextStep').addEventListener('click', nextStep);
+        closeStep.addEventListener('click', function() {
+            stepOverlay.classList.remove('active');
+        });
+        stepOverlay.addEventListener('click', function(e) {
+            if (e.target === this) stepOverlay.classList.remove('active');
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                if (loginOverlay.classList.contains('active')) hideLogin();
+                if (stepOverlay.classList.contains('active')) stepOverlay.classList.remove('active');
+                if (isSideOpen) {
+                    sidePanel.classList.remove('active');
+                    isSideOpen = false;
+                }
+            }
+            if (stepOverlay.classList.contains('active')) {
+                if (e.key === 'ArrowRight' || e.key === ' ') {
+                    e.preventDefault();
+                    nextStep();
+                }
+                if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    prevStep();
+                }
+            }
+        });
+
+        // Booking form
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('emailInput').value.trim();
+            const phone = document.getElementById('phoneInput').value.trim();
+            const service = document.getElementById('serviceSelect').value;
+            const date = document.getElementById('dateInput').value;
+            const time = document.getElementById('timeInput').value;
+            const notes = document.getElementById('notesInput').value.trim();
+
+            if (!name) { showToast('Please enter your name'); return; }
+            if (!email) { showToast('Please enter your email'); return; }
+            if (!date) { showToast('Please select a date'); return; }
+            if (!time) { showToast('Please select a time'); return; }
+
+            const newB = {
+                id: genId(),
+                name: name,
+                email: email,
+                phone: phone,
+                service: service,
+                date: date,
+                time: time,
+                notes: notes,
+                status: 'pending'
+            };
+            bookings.push(newB);
+            saveBookings();
+            renderTable();
+            addLog('📝 New booking', `${name} - ${service}`);
+            showToast(`✅ Booking sent! ${name} 🎉`);
+            launchConfetti();
+
+            document.getElementById('fullName').value = '';
+            document.getElementById('emailInput').value = '';
+            document.getElementById('notesInput').value = '';
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            document.getElementById('dateInput').value = tomorrow.toISOString().split('T')[0];
+        });
+
+        // Refresh & Clear
+        document.getElementById('refreshBtn').addEventListener('click', function() {
+            if (!isAdminLoggedIn) { showLogin(); return; }
+            renderTable();
+            showToast('🔄 Refreshed');
+        });
+
+        document.getElementById('clearBtn').addEventListener('click', function() {
+            if (!isAdminLoggedIn) { showLogin(); return; }
+            if (bookings.length === 0) { showToast('No bookings to clear'); return; }
+            if (confirm('⚠️ Delete ALL bookings?')) {
+                addLog('🗑️ Cleared all', `${bookings.length} bookings removed`);
+                bookings = [];
+                saveBookings();
+                renderTable();
+                showToast('All bookings cleared');
+            }
+        });
+
+        // ============================================================
+        // INIT
+        // ============================================================
+        function setDefaultDate() {
+            const dateInput = document.getElementById('dateInput');
+            if (dateInput) {
+                const tomorrow = new Date();
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                dateInput.value = tomorrow.toISOString().split('T')[0];
+            }
+        }
+
+        loadBookings();
+        loadLogs();
+        setDefaultDate();
+        updateStep();
+
+        if (window.location.search.includes('admin')) {
+            setTimeout(showLogin, 500);
+        }
+
+        console.log('✅ Royal Fade Barbers is ready!');
+        console.log('📝 Admin password: royal89796959');
+        console.log('✉️ Barber Gmail: hardysha35@gmail.com');
+        console.log('📞 Phone: 07383 373183');
+        console.log('📊 Bookings:', bookings.length);
+        console.log('📋 Logs:', logs.length);
+        console.log('👆 Click any price to preview the haircut!');
+    </script>
 
 </body>
 </html>
